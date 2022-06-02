@@ -17,6 +17,7 @@ pub enum ColorCode {
     Pink,
     Grey,
     LightGrey,
+    Raw(i32),
     Unset,
 }
 
@@ -39,6 +40,7 @@ impl fmt::Display for ColorCode {
             ColorCode::Pink => write!(f, "13"),
             ColorCode::Grey => write!(f, "14"),
             ColorCode::LightGrey => write!(f, "15"),
+            ColorCode::Raw(c) => write!(f, "{:02}", c),
             ColorCode::Unset => Ok(()),
         }
     }
