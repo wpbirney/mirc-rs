@@ -1,6 +1,6 @@
 pub mod color;
 
-use color::Color;
+pub use color::Color;
 
 use std::fmt;
 
@@ -33,11 +33,7 @@ macro_rules! constructors_for {
 
 impl<T> Paint<T> {
     pub fn new(fg: Color, bg: Color, content: T) -> Paint<T> {
-        Paint {
-            fg,
-            bg,
-            content,
-        }
+        Paint { fg, bg, content }
     }
 
     constructors_for!(

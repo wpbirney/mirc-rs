@@ -2,6 +2,8 @@
 
 A simple mirc color code formatter partially inspired by [yansi](https://github.com/SergioBenitez/yansi)
 
+[docs.rs](https://docs.rs/mirc/latest/mirc/index.html)
+
 ## Usage
 
 ```rust
