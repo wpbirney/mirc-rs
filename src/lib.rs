@@ -55,4 +55,9 @@ impl<T> Paint<T> {
         grey: Grey,
         lightgrey: LightGrey
     );
+
+    pub fn bg(mut self, bg: Color) -> Paint<T> {
+        self.bg = bg;
+        self
+    }
 }
