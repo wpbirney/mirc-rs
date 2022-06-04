@@ -2,12 +2,12 @@ use std::fmt;
 
 use crate::color::Color;
 
-pub struct Rainbow {
+pub struct Rainbow<'r>  {
     colors: Vec<Color>,
-    content: String,
+    content: &'r str,
 }
 
-impl fmt::Display for Rainbow {
+impl fmt::Display for Rainbow<'_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let mut idx = 0;
 
@@ -23,12 +23,12 @@ impl fmt::Display for Rainbow {
     }
 }
 
-impl Rainbow {
-    pub fn new(content: String, colors: Vec<Color>) -> Rainbow {
+impl<'r> Rainbow<'r> {
+    pub fn new(content: &'r str, colors: Vec<Color>) -> Rainbow {
         Rainbow { colors, content }
     }
-    
-    pub fn default(content: String) -> Rainbow {
+
+    pub fn default(content: &'r str) -> Rainbow {
         Rainbow {
             colors: vec![
                 Color::Red,
