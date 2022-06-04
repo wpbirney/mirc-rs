@@ -1,6 +1,8 @@
 pub mod color;
+pub mod rainbow;
 
 pub use color::Color;
+pub use rainbow::Rainbow;
 
 use std::fmt;
 
