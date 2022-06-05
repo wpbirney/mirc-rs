@@ -1,5 +1,7 @@
 # mirc-rs
 
+[![Crates.io](https://img.shields.io/crates/v/mirc)](https://crates.io/crates/mirc/)
+
 A simple mirc color code formatter partially inspired by [yansi](https://github.com/SergioBenitez/yansi)
 
 [docs.rs](https://docs.rs/mirc/latest/mirc/index.html)
