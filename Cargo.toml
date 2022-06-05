@@ -1,6 +1,6 @@
 [package]
 name = "mirc"
-version = "0.1.5"
+version = "0.1.6"
 edition = "2021"
 authors = ["wpbirney <wpb@360scada.com"]
 description = "Simple mirc color formatting for irc clients"
