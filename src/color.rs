@@ -1,5 +1,6 @@
 use std::fmt;
 
+/// Enumeration of mirc color codes
 pub enum Color {
     White,
     Black,
