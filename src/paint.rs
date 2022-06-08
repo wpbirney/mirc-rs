@@ -2,10 +2,27 @@ use crate::Color;
 
 use std::fmt;
 
+enum Style {
+    Default,
+    Bold,
+    Italics,
+}
+
+impl fmt::Display for Style {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Style::Default => Ok(()),
+            Style::Bold => write!(f, "\x02"),
+            Style::Italics => write!(f, "\x1D"),
+        }
+    }
+}
+
 /// Simple structure for handling most basic mirc color painting needs
 pub struct Paint<T> {
     fg: Color,
     bg: Color,
+    style: Style,
     content: T,
 }
 
@@ -15,8 +32,16 @@ where
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self.bg {
-            Color::Unset => write!(f, "\x03{:02}{}\x03", self.fg, self.content),
-            _ => write!(f, "\x03{:02},{:02}{}\x03", self.fg, self.bg, self.content),
+            Color::Unset => write!(
+                f,
+                "{}\x03{:02}{}\x03{}",
+                self.style, self.fg, self.content, self.style
+            ),
+            _ => write!(
+                f,
+                "{}\x03{:02},{:02}{}\x03{}",
+                self.style, self.fg, self.bg, self.content, self.style
+            ),
         }
     }
 }
@@ -32,7 +57,12 @@ macro_rules! constructors_for {
 
 impl<T> Paint<T> {
     pub fn new(fg: Color, bg: Color, content: T) -> Paint<T> {
-        Paint { fg, bg, content }
+        Paint {
+            fg,
+            bg,
+            style: Style::Default,
+            content,
+        }
     }
 
     constructors_for!(
@@ -57,6 +87,16 @@ impl<T> Paint<T> {
 
     pub fn bg(mut self, bg: Color) -> Paint<T> {
         self.bg = bg;
+        self
+    }
+
+    pub fn bold(mut self) -> Paint<T> {
+        self.style = Style::Bold;
+        self
+    }
+
+    pub fn italics(mut self) -> Paint<T> {
+        self.style = Style::Italics;
         self
     }
 }
