@@ -5,7 +5,7 @@ use std::fmt;
 enum Style {
     Default,
     Bold,
-    Italics,
+    Italic,
 }
 
 impl fmt::Display for Style {
@@ -13,7 +13,7 @@ impl fmt::Display for Style {
         match self {
             Style::Default => Ok(()),
             Style::Bold => write!(f, "\x02"),
-            Style::Italics => write!(f, "\x1D"),
+            Style::Italic => write!(f, "\x1D"),
         }
     }
 }
@@ -90,13 +90,27 @@ impl<T> Paint<T> {
         self
     }
 
+    /// Adds bold styling to the content
+    ///
+    /// ```rust
+    /// use mirc::Paint;
+    ///
+    /// irc.send_privmsg("#channel", format!("{}", Paint::green("hello world").bold()));
+    /// ```
     pub fn bold(mut self) -> Paint<T> {
         self.style = Style::Bold;
         self
     }
 
-    pub fn italics(mut self) -> Paint<T> {
-        self.style = Style::Italics;
+    /// Adds italic styling to the content
+    ///
+    /// ```rust
+    /// use mirc::Paint;
+    ///
+    /// irc.send_privmsg("#channel", format!("{}", Paint::green("hello world").italics()));
+    /// ```
+    pub fn italic(mut self) -> Paint<T> {
+        self.style = Style::Italic;
         self
     }
 }
